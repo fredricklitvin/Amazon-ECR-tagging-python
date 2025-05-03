@@ -105,6 +105,8 @@ def delete_repositories():
     except Exception as e:
         print(f" An unexpected error occurred: {str(e)}")
 
+def upload_images():
+    print("hi")
 #makes sure the program doesn't stop until being told
 exit_menu = False
 
@@ -113,6 +115,12 @@ response_user = iam_client.get_user()
 user_name_split = response_user['User']['Arn'].split(':')
 user_name = user_name_split[-1]
 
+response_token = client.get_authorization_token(
+    # registryIds=[
+    #     'string',
+    # ]
+)
+print(response_token)
 # the main menu where you decide what action to use
 while not exit_menu:
     starting_menu = questionary.select(
@@ -124,6 +132,8 @@ while not exit_menu:
         list_repositories(True)
     elif starting_menu == 'Manage repositories':
         manage_repositories()
+    elif starting_menu == 'Upload images':
+        upload_images()
     else:
         print("Thanks for your time, have a nice day!")
         exit_menu = True
